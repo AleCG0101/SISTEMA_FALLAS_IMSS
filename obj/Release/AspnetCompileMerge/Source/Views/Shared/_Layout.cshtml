@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="~/Content/Imagenes/LogoImss.png">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/CSS/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" href="~/Content/CSS/font-awesome/css/brands.css">
+    <link rel="stylesheet" href="~/Content/CSS/font-awesome/css/solid.css">
+
+    <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+
+
+    <title>@ViewBag.Title - Sistema de Reportes de Fallas</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-success">
+        <div class="container">
+            @Html.ActionLink("Sistema de Reporte de Fallas", "Index", "Home", new { usuario = User.Identity.Name }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (Sistema_Fallas_IMSS.Controllers.HomeController.ObtenerRol(User.Identity.Name) == 1)
+                    {
+                        <li>@Html.ActionLink("Hospitales", "Index", "Hospitales", new { usuario = User.Identity.Name }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Materiales", "Index", "Materiales", new { usuario = User.Identity.Name }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Usuarios", "Index", "Usuarios", new { usuario = User.Identity.Name }, new { @class = "nav-link" })</li>
+                    }
+                    <li>@Html.ActionLink("Salir", "Logout", "Account", new { usuario = User.Identity.Name }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - IMSS.GOB.MX</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</body>
+</html>

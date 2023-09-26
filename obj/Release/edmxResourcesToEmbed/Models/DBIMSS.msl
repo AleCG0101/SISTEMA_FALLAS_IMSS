@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBIMSSStoreContainer" CdmEntityContainer="IMSSEntities">
+    <EntitySetMapping Name="areas_imss">
+      <EntityTypeMapping TypeName="DBIMSS.areas_imss">
+        <MappingFragment StoreEntitySet="areas_imss">
+          <ScalarProperty Name="Id_area" ColumnName="Id_area" />
+          <ScalarProperty Name="nombre_area" ColumnName="nombre_area" />
+          <ScalarProperty Name="id_hospital" ColumnName="id_hospital" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="existencias">
+      <EntityTypeMapping TypeName="DBIMSS.existencias">
+        <MappingFragment StoreEntitySet="existencias">
+          <ScalarProperty Name="Id_existencia" ColumnName="Id_existencia" />
+          <ScalarProperty Name="id_material" ColumnName="id_material" />
+          <ScalarProperty Name="id_area" ColumnName="id_area" />
+          <ScalarProperty Name="tipo_existencia" ColumnName="tipo_existencia" />
+          <ScalarProperty Name="pc" ColumnName="pc" />
+          <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+          <ScalarProperty Name="direccion_ip" ColumnName="direccion_ip" />
+          <ScalarProperty Name="nombre_persona" ColumnName="nombre_persona" />
+          <ScalarProperty Name="nsm" ColumnName="nsm" />
+          <ScalarProperty Name="nnn" ColumnName="nnn" />
+          <ScalarProperty Name="serial" ColumnName="serial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fallas">
+      <EntityTypeMapping TypeName="DBIMSS.fallas">
+        <MappingFragment StoreEntitySet="fallas">
+          <ScalarProperty Name="Id_falla" ColumnName="Id_falla" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id_tipo_falla" ColumnName="Id_tipo_falla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hospitales_imss">
+      <EntityTypeMapping TypeName="DBIMSS.hospitales_imss">
+        <MappingFragment StoreEntitySet="hospitales_imss">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="director" ColumnName="director" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="municipio" ColumnName="municipio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="material_estados">
+      <EntityTypeMapping TypeName="DBIMSS.material_estados">
+        <MappingFragment StoreEntitySet="material_estados">
+          <ScalarProperty Name="Id_estado" ColumnName="Id_estado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="materiales">
+      <EntityTypeMapping TypeName="DBIMSS.materiales">
+        <MappingFragment StoreEntitySet="materiales">
+          <ScalarProperty Name="Id_material" ColumnName="Id_material" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="id_tipo_hardware" ColumnName="id_tipo_hardware" />
+          <ScalarProperty Name="centro_costos" ColumnName="centro_costos" />
+          <ScalarProperty Name="nombre_proyecto" ColumnName="nombre_proyecto" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="operacion">
+      <EntityTypeMapping TypeName="DBIMSS.operacion">
+        <MappingFragment StoreEntitySet="operacion">
+          <ScalarProperty Name="Id_operacion" ColumnName="Id_operacion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reporte">
+      <EntityTypeMapping TypeName="DBIMSS.reporte">
+        <MappingFragment StoreEntitySet="reporte">
+          <ScalarProperty Name="Id_reporte" ColumnName="Id_reporte" />
+          <ScalarProperty Name="ip_usuario" ColumnName="ip_usuario" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+          <ScalarProperty Name="fecha_concluido" ColumnName="fecha_concluido" />
+          <ScalarProperty Name="contacto" ColumnName="contacto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reporte_fallas">
+      <EntityTypeMapping TypeName="DBIMSS.reporte_fallas">
+        <MappingFragment StoreEntitySet="reporte_fallas">
+          <ScalarProperty Name="Id_reporte_falla" ColumnName="Id_reporte_falla" />
+          <ScalarProperty Name="id_reporte" ColumnName="id_reporte" />
+          <ScalarProperty Name="id_falla" ColumnName="id_falla" />
+          <ScalarProperty Name="falla" ColumnName="falla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol_operacion">
+      <EntityTypeMapping TypeName="DBIMSS.rol_operacion">
+        <MappingFragment StoreEntitySet="rol_operacion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+          <ScalarProperty Name="id_operacion" ColumnName="id_operacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="DBIMSS.roles">
+        <MappingFragment StoreEntitySet="roles">
+          <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_hardware">
+      <EntityTypeMapping TypeName="DBIMSS.tipo_hardware">
+        <MappingFragment StoreEntitySet="tipo_hardware">
+          <ScalarProperty Name="Id_tipo_hardware" ColumnName="Id_tipo_hardware" />
+          <ScalarProperty Name="tipo_producto" ColumnName="tipo_producto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipos_falla">
+      <EntityTypeMapping TypeName="DBIMSS.tipos_falla">
+        <MappingFragment StoreEntitySet="tipos_falla">
+          <ScalarProperty Name="Id_tipo_falla" ColumnName="Id_tipo_falla" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios">
+      <EntityTypeMapping TypeName="DBIMSS.usuarios">
+        <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,17 @@
+﻿@using NonFactors.Mvc.Grid
+@model List<Sistema_Fallas_IMSS.ViewModels.VM_TipoHardware>
+@(Html.Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id_tipo_hardware).Hidden();
+        columns.Add(model => model.Tipo_producto).Titled("Tipo de Hardware");
+        columns.Add(model => model.Id_tipo_hardware).Titled("Editar").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick='AbrirModalTipo({model.Id_tipo_hardware})' data-placement='left'><span style='text-align:center'><i class='fa-solid fa-pen-to-square btn btn-info'></i></span></a>");
+    })
+.Empty("Sin registros encontrados")
+.Named("gridTipos")
+.Id("gridTipos")
+.Pageable(pager =>
+{
+    pager.RowsPerPage = 10;
+})
+)

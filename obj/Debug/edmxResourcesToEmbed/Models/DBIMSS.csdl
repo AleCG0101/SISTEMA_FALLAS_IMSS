@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBIMSS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="areas_imss">
+    <Key>
+      <PropertyRef Name="Id_area" />
+    </Key>
+    <Property Name="Id_area" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_area" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="id_hospital" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="hospitales_imss" Relationship="Self.FK__areas_ims__id_ho__628FA481" FromRole="areas_imss" ToRole="hospitales_imss" />
+    <NavigationProperty Name="existencias" Relationship="Self.FK__existenci__id_ar__693CA210" FromRole="areas_imss" ToRole="existencias" />
+  </EntityType>
+  <EntityType Name="existencias">
+    <Key>
+      <PropertyRef Name="Id_existencia" />
+    </Key>
+    <Property Name="Id_existencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_material" Type="Int32" Nullable="false" />
+    <Property Name="id_area" Type="Int32" Nullable="false" />
+    <Property Name="tipo_existencia" Type="Int32" Nullable="false" />
+    <Property Name="pc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="direccion_ip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nombre_persona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nsm" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nnn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="serial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="areas_imss" Relationship="Self.FK__existenci__id_ar__693CA210" FromRole="existencias" ToRole="areas_imss" />
+    <NavigationProperty Name="materiales" Relationship="Self.FK__existenci__id_ma__68487DD7" FromRole="existencias" ToRole="materiales" />
+  </EntityType>
+  <EntityType Name="fallas">
+    <Key>
+      <PropertyRef Name="Id_falla" />
+    </Key>
+    <Property Name="Id_falla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Id_tipo_falla" Type="Int32" />
+    <NavigationProperty Name="tipos_falla" Relationship="Self.FK__fallas__Id_tipo___6A30C649" FromRole="fallas" ToRole="tipos_falla" />
+  </EntityType>
+  <EntityType Name="hospitales_imss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="director" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="areas_imss" Relationship="Self.FK__areas_ims__id_ho__628FA481" FromRole="hospitales_imss" ToRole="areas_imss" />
+  </EntityType>
+  <EntityType Name="material_estados">
+    <Key>
+      <PropertyRef Name="Id_estado" />
+    </Key>
+    <Property Name="Id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="materiales" Relationship="Self.FK__materiale__id_es__6754599E" FromRole="material_estados" ToRole="materiales" />
+  </EntityType>
+  <EntityType Name="materiales">
+    <Key>
+      <PropertyRef Name="Id_material" />
+    </Key>
+    <Property Name="Id_material" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="marca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="id_tipo_hardware" Type="Int32" Nullable="false" />
+    <Property Name="centro_costos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_proyecto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int32" Nullable="false" />
+    <Property Name="comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="existencias" Relationship="Self.FK__existenci__id_ma__68487DD7" FromRole="materiales" ToRole="existencias" />
+    <NavigationProperty Name="material_estados" Relationship="Self.FK__materiale__id_es__6754599E" FromRole="materiales" ToRole="material_estados" />
+    <NavigationProperty Name="tipo_hardware" Relationship="Self.FK__materiale__id_ti__66603565" FromRole="materiales" ToRole="tipo_hardware" />
+  </EntityType>
+  <EntityType Name="operacion">
+    <Key>
+      <PropertyRef Name="Id_operacion" />
+    </Key>
+    <Property Name="Id_operacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="rol_operacion" Relationship="Self.FK__rol_opera__id_op__656C112C" FromRole="operacion" ToRole="rol_operacion" />
+  </EntityType>
+  <EntityType Name="reporte">
+    <Key>
+      <PropertyRef Name="Id_reporte" />
+    </Key>
+    <Property Name="Id_reporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ip_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_concluido" Type="DateTime" Precision="3" />
+    <Property Name="contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="reporte_fallas" Relationship="Self.FK__reporte_f__id_re__6B24EA82" FromRole="reporte" ToRole="reporte_fallas" />
+  </EntityType>
+  <EntityType Name="reporte_fallas">
+    <Key>
+      <PropertyRef Name="Id_reporte_falla" />
+    </Key>
+    <Property Name="Id_reporte_falla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_reporte" Type="Int32" Nullable="false" />
+    <Property Name="id_falla" Type="Int32" />
+    <Property Name="falla" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="reporte" Relationship="Self.FK__reporte_f__id_re__6B24EA82" FromRole="reporte_fallas" ToRole="reporte" />
+  </EntityType>
+  <EntityType Name="rol_operacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_rol" Type="Int32" Nullable="false" />
+    <Property Name="id_operacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="operacion" Relationship="Self.FK__rol_opera__id_op__656C112C" FromRole="rol_operacion" ToRole="operacion" />
+    <NavigationProperty Name="roles" Relationship="Self.FK__rol_opera__Id_ro__6477ECF3" FromRole="rol_operacion" ToRole="roles" />
+  </EntityType>
+  <EntityType Name="roles">
+    <Key>
+      <PropertyRef Name="Id_rol" />
+    </Key>
+    <Property Name="Id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="rol_operacion" Relationship="Self.FK__rol_opera__Id_ro__6477ECF3" FromRole="roles" ToRole="rol_operacion" />
+    <NavigationProperty Name="usuarios" Relationship="Self.FK__usuarios__id_rol__6383C8BA" FromRole="roles" ToRole="usuarios" />
+  </EntityType>
+  <EntityType Name="tipo_hardware">
+    <Key>
+      <PropertyRef Name="Id_tipo_hardware" />
+    </Key>
+    <Property Name="Id_tipo_hardware" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipo_producto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="materiales" Relationship="Self.FK__materiale__id_ti__66603565" FromRole="tipo_hardware" ToRole="materiales" />
+  </EntityType>
+  <EntityType Name="tipos_falla">
+    <Key>
+      <PropertyRef Name="Id_tipo_falla" />
+    </Key>
+    <Property Name="Id_tipo_falla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="fallas" Relationship="Self.FK__fallas__Id_tipo___6A30C649" FromRole="tipos_falla" ToRole="fallas" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="matricula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_rol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="roles" Relationship="Self.FK__usuarios__id_rol__6383C8BA" FromRole="usuarios" ToRole="roles" />
+  </EntityType>
+  <Association Name="FK__areas_ims__id_ho__628FA481">
+    <End Role="hospitales_imss" Type="Self.hospitales_imss" Multiplicity="1" />
+    <End Role="areas_imss" Type="Self.areas_imss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hospitales_imss">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="areas_imss">
+        <PropertyRef Name="id_hospital" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__existenci__id_ar__693CA210">
+    <End Role="areas_imss" Type="Self.areas_imss" Multiplicity="1" />
+    <End Role="existencias" Type="Self.existencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="areas_imss">
+        <PropertyRef Name="Id_area" />
+      </Principal>
+      <Dependent Role="existencias">
+        <PropertyRef Name="id_area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__existenci__id_ma__68487DD7">
+    <End Role="materiales" Type="Self.materiales" Multiplicity="1" />
+    <End Role="existencias" Type="Self.existencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="materiales">
+        <PropertyRef Name="Id_material" />
+      </Principal>
+      <Dependent Role="existencias">
+        <PropertyRef Name="id_material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__fallas__Id_tipo___6A30C649">
+    <End Role="tipos_falla" Type="Self.tipos_falla" Multiplicity="0..1" />
+    <End Role="fallas" Type="Self.fallas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipos_falla">
+        <PropertyRef Name="Id_tipo_falla" />
+      </Principal>
+      <Dependent Role="fallas">
+        <PropertyRef Name="Id_tipo_falla" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__materiale__id_es__6754599E">
+    <End Role="material_estados" Type="Self.material_estados" Multiplicity="1" />
+    <End Role="materiales" Type="Self.materiales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="material_estados">
+        <PropertyRef Name="Id_estado" />
+      </Principal>
+      <Dependent Role="materiales">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__materiale__id_ti__66603565">
+    <End Role="tipo_hardware" Type="Self.tipo_hardware" Multiplicity="1" />
+    <End Role="materiales" Type="Self.materiales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_hardware">
+        <PropertyRef Name="Id_tipo_hardware" />
+      </Principal>
+      <Dependent Role="materiales">
+        <PropertyRef Name="id_tipo_hardware" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__rol_opera__id_op__656C112C">
+    <End Role="operacion" Type="Self.operacion" Multiplicity="1" />
+    <End Role="rol_operacion" Type="Self.rol_operacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="operacion">
+        <PropertyRef Name="Id_operacion" />
+      </Principal>
+      <Dependent Role="rol_operacion">
+        <PropertyRef Name="id_operacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reporte_f__id_re__6B24EA82">
+    <End Role="reporte" Type="Self.reporte" Multiplicity="1" />
+    <End Role="reporte_fallas" Type="Self.reporte_fallas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reporte">
+        <PropertyRef Name="Id_reporte" />
+      </Principal>
+      <Dependent Role="reporte_fallas">
+        <PropertyRef Name="id_reporte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__rol_opera__Id_ro__6477ECF3">
+    <End Role="roles" Type="Self.roles" Multiplicity="1" />
+    <End Role="rol_operacion" Type="Self.rol_operacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="Id_rol" />
+      </Principal>
+      <Dependent Role="rol_operacion">
+        <PropertyRef Name="Id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuarios__id_rol__6383C8BA">
+    <End Role="roles" Type="Self.roles" Multiplicity="1" />
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="Id_rol" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IMSSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="areas_imss" EntityType="Self.areas_imss" />
+    <EntitySet Name="existencias" EntityType="Self.existencias" />
+    <EntitySet Name="fallas" EntityType="Self.fallas" />
+    <EntitySet Name="hospitales_imss" EntityType="Self.hospitales_imss" />
+    <EntitySet Name="material_estados" EntityType="Self.material_estados" />
+    <EntitySet Name="materiales" EntityType="Self.materiales" />
+    <EntitySet Name="operacion" EntityType="Self.operacion" />
+    <EntitySet Name="reporte" EntityType="Self.reporte" />
+    <EntitySet Name="reporte_fallas" EntityType="Self.reporte_fallas" />
+    <EntitySet Name="rol_operacion" EntityType="Self.rol_operacion" />
+    <EntitySet Name="roles" EntityType="Self.roles" />
+    <EntitySet Name="tipo_hardware" EntityType="Self.tipo_hardware" />
+    <EntitySet Name="tipos_falla" EntityType="Self.tipos_falla" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+    <AssociationSet Name="FK__areas_ims__id_ho__628FA481" Association="Self.FK__areas_ims__id_ho__628FA481">
+      <End Role="hospitales_imss" EntitySet="hospitales_imss" />
+      <End Role="areas_imss" EntitySet="areas_imss" />
+    </AssociationSet>
+    <AssociationSet Name="FK__existenci__id_ar__693CA210" Association="Self.FK__existenci__id_ar__693CA210">
+      <End Role="areas_imss" EntitySet="areas_imss" />
+      <End Role="existencias" EntitySet="existencias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__existenci__id_ma__68487DD7" Association="Self.FK__existenci__id_ma__68487DD7">
+      <End Role="materiales" EntitySet="materiales" />
+      <End Role="existencias" EntitySet="existencias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__fallas__Id_tipo___6A30C649" Association="Self.FK__fallas__Id_tipo___6A30C649">
+      <End Role="tipos_falla" EntitySet="tipos_falla" />
+      <End Role="fallas" EntitySet="fallas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__materiale__id_es__6754599E" Association="Self.FK__materiale__id_es__6754599E">
+      <End Role="material_estados" EntitySet="material_estados" />
+      <End Role="materiales" EntitySet="materiales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__materiale__id_ti__66603565" Association="Self.FK__materiale__id_ti__66603565">
+      <End Role="tipo_hardware" EntitySet="tipo_hardware" />
+      <End Role="materiales" EntitySet="materiales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__rol_opera__id_op__656C112C" Association="Self.FK__rol_opera__id_op__656C112C">
+      <End Role="operacion" EntitySet="operacion" />
+      <End Role="rol_operacion" EntitySet="rol_operacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reporte_f__id_re__6B24EA82" Association="Self.FK__reporte_f__id_re__6B24EA82">
+      <End Role="reporte" EntitySet="reporte" />
+      <End Role="reporte_fallas" EntitySet="reporte_fallas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__rol_opera__Id_ro__6477ECF3" Association="Self.FK__rol_opera__Id_ro__6477ECF3">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="rol_operacion" EntitySet="rol_operacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuarios__id_rol__6383C8BA" Association="Self.FK__usuarios__id_rol__6383C8BA">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

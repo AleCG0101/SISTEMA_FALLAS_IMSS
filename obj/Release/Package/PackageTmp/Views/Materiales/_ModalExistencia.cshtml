@@ -1,0 +1,58 @@
+﻿@model Sistema_Fallas_IMSS.ViewModels.VM_Existencias
+@{
+    Layout = null;
+}
+@Html.HiddenFor(model => model.Id_existencia)
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label>Material:</label>
+            @Html.DropDownListFor(model => model.Material, Model.Materiales, "Seleccione un tipo", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Nombre de la persona:</label>
+            @Html.TextBoxFor(model => model.Nombre_persona, "", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Area:</label>
+            @Html.DropDownListFor(model => model.Area, Model.Areas, "Seleccione un area", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Pc:</label>
+            @Html.TextBoxFor(model => model.Pc, "", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Cuenta:</label>
+            @Html.TextBoxFor(model => model.Cuenta, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Direccion IP:</label>
+            @Html.TextBoxFor(model => model.Direccion_ip, "", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Serial:</label>
+            @Html.TextBoxFor(model => model.Serial, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Nsm:</label>
+            @Html.TextBoxFor(model => model.Nsm, "", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Nnn:</label>
+            @Html.TextBoxFor(model => model.Nnn, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            @Html.CheckBoxFor(model => model.Tipo) Existencia Global?
+        </div>
+    </div>
+</div>

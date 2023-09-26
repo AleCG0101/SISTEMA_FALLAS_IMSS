@@ -1,0 +1,352 @@
+﻿@using NonFactors.Mvc.Grid
+@model Sistema_Fallas_IMSS.ViewModels.VM_Materiales
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="materiales-tab" data-bs-toggle="tab" data-bs-target="#materiales" type="button" role="tab" aria-controls="materiales" aria-selected="true">Materiales</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="existencias-tab" data-bs-toggle="tab" data-bs-target="#existencias" type="button" role="tab" aria-controls="existencias" aria-selected="false">Existencias</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tipos-tab" data-bs-toggle="tab" data-bs-target="#tipos" type="button" role="tab" aria-controls="tipos" aria-selected="false">Tipos Hardware</button>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="materiales" role="tabpanel" aria-labelledby="materiales-tab">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <section class="content-header">
+                    <div class="row bottom30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 style="margin-top: 10px; text-align:center;">Materiales</h3>
+                        </div>
+                    </div>
+                </section>
+                <section class="content">
+                    <br />
+                    <div>
+                        <button class="btn btn-primary" onclick="AbrirModalMaterial(0)">Registrar Material</button>
+                    </div>
+                    <br />
+                    @Html.AjaxGrid(Url.Action("MaterialesGrid", "Materiales"),
+                        new { id = "gridMateriales", name = "gridMateriales" })
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="existencias" role="tabpanel" aria-labelledby="existencias-tab">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <section class="content-header">
+                    <div class="row bottom30">
+                        <br />
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 style="margin-top: 10px; text-align:center;">Existencias</h3>
+                        </div>
+                    </div>
+                </section>
+                <section class="content">
+                    <br />
+                    <div>
+                        <button class="btn btn-primary" onclick="AbrirModalExistencia(0)">Registrar Existencia</button>
+                    </div>
+                    <br />
+                    @Html.AjaxGrid(Url.Action("ExistenciaGrid", "Materiales"),
+                        new { id = "gridExistencia", name = "gridExistencia" })
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="tipos" role="tabpanel" aria-labelledby="tipos-tab">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <section class="content-header">
+                    <div class="row bottom30">
+                        <br />
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 style="margin-top: 10px; text-align:center;">Tipos de Hardware</h3>
+                        </div>
+                    </div>
+                </section>
+                <section class="content">
+                    <br />
+                    <div>
+                        <button class="btn btn-primary" onclick="AbrirModalTipo(0)">Agregar nuevo</button>
+                    </div>
+                    <br />
+                    @Html.AjaxGrid(Url.Action("TiposHardwareGrid", "Materiales"),
+                        new { id = "gridTipos", name = "gridTipos" })
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+    </div>
+</div>
+
+
+<!--Modal para Editar/Crear Materiales-->
+<div id="mdl_Materiales" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Material</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <br />
+            <div class="modal-body">
+
+                <!-- PartialView _ModalMaterial.cshtml -->
+
+            </div>
+            <!-- Modal footer -->
+            <div class=" modal-footer">
+                <button type="button" class="btn btn-success" onclick="RegistrarEditarMaterial()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal para Editar/Crear Existencias-->
+<div id="mdl_Existencia" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Existencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <br />
+            <div class="modal-body">
+
+                <!-- PartialView _ModalExistencias.cshtml -->
+
+            </div>
+            <!-- Modal footer -->
+            <div class=" modal-footer">
+                <button type="button" class="btn btn-success" onclick="RegistrarEditarExistencia()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal para Editar/Crear Tipos-->
+<div id="mdl_Tipo" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tipo de Hardware</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <br />
+            <div class="modal-body">
+
+                <!-- PartialView _ModalTipos.cshtml -->
+
+            </div>
+            <!-- Modal footer -->
+            <div class=" modal-footer">
+                <button type="button" class="btn btn-success" onclick="RegistrarEditarTipo()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+<script type="text/javascript">
+
+    window.onload = (event) => {
+
+        [].forEach.call(document.getElementsByClassName('mvc-grid'), function (element) {
+            new MvcGrid(element);
+        });
+    }
+    function AbrirModalMaterial(id_material) {
+        $.ajax({
+            type: "POST",
+            url: '@Href("~/Materiales/AbrirModalMaterial")',
+            data: JSON.stringify({ _id_material: id_material }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+
+                $("#mdl_Materiales").find(".modal-body").html(response);
+                $("#mdl_Materiales").modal('show');
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+    function AbrirModalExistencia(id_existencia) {
+         $.ajax({
+            type: "POST",
+            url: '@Href("~/Materiales/AbrirModalExistencias")',
+             data: JSON.stringify({ _id_existencia: id_existencia }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+
+                $("#mdl_Existencia").find(".modal-body").html(response);
+                $("#mdl_Existencia").modal('show');
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+    function AbrirModalTipo(id_tipo) {
+         $.ajax({
+            type: "POST",
+            url: '@Href("~/Materiales/AbrirModalTipo")',
+             data: JSON.stringify({ _id_tipo: id_tipo }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+
+                $("#mdl_Tipo").find(".modal-body").html(response);
+                $("#mdl_Tipo").modal('show');
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+    function RegistrarEditarMaterial() {
+        var formData = new FormData();
+        formData.append("Id_material", $("#Id_material").val());
+        formData.append("Nombre", $("#Nombre").val());
+        formData.append("Marca", $("#Marca").val());
+        formData.append("Modelo", $("#Modelo").val());
+        formData.append("Centro_costos", $("#Centro_costos").val());
+        formData.append("Proyecto", $("#Proyecto").val());
+        formData.append("Tipo_hardware", $("#Tipo_hardware").val());
+        formData.append("Estado", $("#Estado").val());
+        formData.append("Comentarios", $("#Comentarios").val());
+
+         $.ajax({
+            type: "POST",
+            url: '@Href("~/Materiales/RegistrarEditarMaterial")',
+            data: formData,
+            contentType: false,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            success: function (response) {
+
+                if (response == 1) {
+                    $("#mdl_Materiales").modal('hide');
+                    var grid = new MvcGrid(document.querySelector("#gridMateriales"))
+                    grid.reload();
+                }
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+    function RegistrarEditarExistencia() {
+
+        var check = document.getElementById('Tipo');
+
+        var formData = new FormData();
+        formData.append("Id_existencia", $("#Id_existencia").val());
+        formData.append("Nombre_persona", $("#Nombre_persona").val());
+        formData.append("Material", $("#Material").val());
+        formData.append("Area", $("#Area").val());
+        formData.append("Pc", $("#Pc").val());
+        formData.append("Cuenta", $("#Cuenta").val());
+        formData.append("Direccion_ip", $("#Direccion_ip").val());
+        formData.append("Serial", $("#Serial").val());
+        formData.append("Nsm", $("#Nsm").val());
+        formData.append("Nnn", $("#Nnn").val());
+        
+        if (check.checked) {
+            formData.append("Tipo_existencia", 1);
+        } else {
+            formData.append("Tipo_existencia", 0);
+        }
+
+         $.ajax({
+            type: "POST",
+            url: '@Href("~/Materiales/RegistrarEditarExistencia")',
+            data: formData,
+            contentType: false,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            success: function (response) {
+
+                if (response == 1) {
+                    $("#mdl_Existencia").modal('hide');
+                    var grid = new MvcGrid(document.querySelector("#gridExistencias"))
+                    grid.reload();
+                }
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+    function RegistrarEditarTipo() {
+
+        var formData = new FormData();
+        formData.append("Id_tipo_hardware", $("#Id_tipo_hardware").val());
+        formData.append("Tipo_producto", $("#Tipo_producto").val());
+
+         $.ajax({
+            type: "POST",
+            url: '@Href("~/Materiales/RegistrarEditarTipo")',
+            data: formData,
+            contentType: false,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            success: function (response) {
+
+                if (response == 1) {
+                    $("#mdl_Tipo").modal('hide');
+                    var grid = new MvcGrid(document.querySelector("#gridTipos"))
+                    grid.reload();
+                }
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+</script>

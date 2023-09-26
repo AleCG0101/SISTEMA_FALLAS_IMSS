@@ -1,0 +1,25 @@
+﻿@using NonFactors.Mvc.Grid
+@model List<Sistema_Fallas_IMSS.ViewModels.VM_Existencias>
+@(Html.Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id_existencia).Hidden();
+        columns.Add(model => model.Tipo_existencia).Titled("Tipo existencia").Encoded(false).RenderedAs(model => model.Tipo_existencia == 1 ? "Global" : "Personal");
+        columns.Add(model => model.Material).Titled("Nombre");
+        columns.Add(model => model.Nombre_persona).Titled("Persona");
+        columns.Add(model => model.Direccion_ip).Titled("Direccion IP");
+        columns.Add(model => model.Pc).Titled("Pc");
+        columns.Add(model => model.Cuenta).Titled("Cuenta");
+        columns.Add(model => model.Nsm).Titled("Nsm");
+        columns.Add(model => model.Nnn).Titled("Nnn");
+        columns.Add(model => model.Serial).Titled("Centro de costos");
+        columns.Add(model => model.Id_existencia).Titled("Editar").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick='AbrirModalExistencia({model.Id_existencia})' data-placement='left'><span style='text-align:center'><i class='fa-solid fa-pen-to-square btn btn-info'></i></span></a>");
+    })
+.Empty("Sin registros encontrados")
+.Named("gridExistencias")
+.Id("gridExistencias")
+.Pageable(pager =>
+{
+    pager.RowsPerPage = 10;
+})
+)

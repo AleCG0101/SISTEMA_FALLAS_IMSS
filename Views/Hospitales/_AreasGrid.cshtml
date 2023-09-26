@@ -1,0 +1,18 @@
+﻿@using NonFactors.Mvc.Grid
+@model Sistema_Fallas_IMSS.ViewModels.VM_Area
+@(Html.Grid(Model.Areas)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id).Hidden();
+        columns.Add(model => model.Nombre_area).Titled("Area");
+        columns.Add(model => model.Hospital).Titled("Hospital");
+        columns.Add(model => model.Id).Titled("Editar").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick='AbrirModalArea({model.Id})' data-placement='left'><span style='text-align:center'><i class='fa-solid fa-pen-to-square btn btn-info'></i></span></a>");
+    })
+.Empty("Sin registros encontrados")
+.Named("gridAreas")
+.Id("gridAreas")
+.Pageable(pager =>
+{
+    pager.RowsPerPage = 10;
+})
+)

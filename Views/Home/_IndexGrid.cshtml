@@ -1,0 +1,26 @@
+﻿@using NonFactors.Mvc.Grid
+@model Sistema_Fallas_IMSS.ViewModels.VM_Index
+@(Html.Grid(Model.Reportes)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id_reporte).Hidden();
+        columns.Add(model => model.Usuario).Titled("Usuario");
+        columns.Add(model => model.Nombre_area).Titled("Area");
+        columns.Add(model => model.Falla).Titled("Falla");
+        columns.Add(model => model.Tipo).Titled("Tipo de falla");
+        columns.Add(model => model.Descripcion).Titled("Descripcion");
+        columns.Add(model => model.Estatus).Titled("Estatus").Encoded(false).RenderedAs(model => model.Estatus == 1 ? "En proceso" : "Atendido");
+        columns.Add(model => model.Fecha_registro).Titled("Fecha Registro").Formatted("{0:d}");
+        columns.Add(model => model.Fecha_concluido).Titled("Fecha Concluido").Formatted("{0:d}");
+        columns.Add(model => model.Contacto).Titled("Contacto");
+        //columns.Add(model => model.Id).Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick='' data-placement='left'><span style='text-align:center'><i class='glyphicon glyphicon-eye-open btn btn-info'></i></span></a>").Sortable(false);
+        //columns.Add(model => model.Id).Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick='' data-id='{model.Id}' data-placement='left'><span style='text-align:center'><i class='glyphicon glyphicon-pencil btn btn-info'></i></span></a>").Sortable(false);
+    })
+.Empty("Sin registros encontrados")
+.Named("gridReportes")
+.Id("gridReportes")
+.Pageable(pager =>
+{
+    pager.RowsPerPage = 10;
+})
+)

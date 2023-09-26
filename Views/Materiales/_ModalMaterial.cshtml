@@ -1,0 +1,51 @@
+﻿@model Sistema_Fallas_IMSS.ViewModels.VM_MaterialesCatalogo
+@{
+    Layout = null;
+}
+@Html.HiddenFor(model => model.Id_material)
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label>Nombre:</label>
+            @Html.TextBoxFor(model => model.Nombre, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Marca:</label>
+            @Html.TextBoxFor(model => model.Marca, "", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Modelo:</label>
+            @Html.TextBoxFor(model => model.Modelo, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Centro de costos:</label>
+            @Html.TextBoxFor(model => model.Centro_costos, "", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Proyecto:</label>
+            @Html.TextBoxFor(model => model.Proyecto, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Tipo de Hardware:</label>
+            @Html.DropDownListFor(model => model.Tipo_hardware, Model.Tipos, "Seleccione un tipo", new {@class = "form-control"})
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Estado:</label>
+            @Html.DropDownListFor(model => model.Estado, Model.Estados, "Seleccione un estado", new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <label>Comentarios:</label>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            @Html.TextAreaFor(model => model.Comentarios, new { @class = "form-control", @rows = 5 })
+        </div>
+    </div>
+</div>
+

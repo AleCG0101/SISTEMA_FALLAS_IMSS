@@ -1,0 +1,81 @@
+﻿@model  Sistema_Fallas_IMSS.ViewModels.VM_Login
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Login</title>
+    <link href="~/Content/CSS/Login.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    @Html.HiddenFor(m => m.Mensaje, new {@id = "hdf_mensaje"})
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <h5>Sistema de Reporte de Fallas IMSS</h5>
+                <img src="~/Content/Imagenes/LogoImss.png" id="icon" alt="User Icon" />
+            </div>
+
+            <!-- Login Form -->
+            @using (Html.BeginForm("Login", "Account", FormMethod.Get))
+            {
+                <input type="text" id="Usuario" class="fadeIn second" name="Usuario" placeholder="Cuenta">
+                <input type="password" id="Password" class="fadeIn third" name="Password" placeholder="Contraseña">
+                <input type="submit" class="fadeIn fourth" onclick="" value="Iniciar Sesion">
+            }
+
+            <!-- Remind Passowrd -->
+            <!--<div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>-->
+
+        </div>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+
+        @*function Login() {
+            var form = new FormData(); 
+            form.append("Usuario", $("#Usuario").val()); 
+            form.append("Password", $("#Password").val()); 
+
+            $.ajax({ 
+                type: "POST", 
+                url: '@Href("~/Account/Login")',
+                data: form, 
+                contentType: false,
+                dataType: "json",
+                cache: false,
+                processData: false, 
+                success: function (response) { 
+
+                    console.log(response); 
+                    if (response == 0) { 
+                        alert("Usuario y/o contraseña incorrecta");
+                    }
+                    if (response == 1) {
+                        window.location = '@Href("~/Home")';
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                complete: function () {
+                    $("#bar_progress").hide();
+                }
+            });
+        }*@
+
+    </script>
+</body>
+</html>

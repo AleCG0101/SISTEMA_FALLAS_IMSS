@@ -1,0 +1,247 @@
+﻿@using NonFactors.Mvc.Grid
+@model Sistema_Fallas_IMSS.ViewModels.VM_Hospital
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+@Html.HiddenFor(model => model.Direccion_ip)
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="hospital-tab" data-bs-toggle="tab" data-bs-target="#hospitales" type="button" role="tab" aria-controls="hospitales" aria-selected="true">Hospitales</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="area-tab" data-bs-toggle="tab" data-bs-target="#areas" type="button" role="tab" aria-controls="areas" aria-selected="false">Areas</button>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="hospitales" role="tabpanel" aria-labelledby="hospital-tab">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <section class="content-header">
+                    <div class="row bottom30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 style="margin-top: 10px; text-align:center;">Hospitales</h3>
+                        </div>
+                    </div>
+                </section>
+                <section class="content">
+                    <br />
+                    <div>
+                        <button class="btn btn-primary" onclick="AbrirModalHospital(0)">Registrar Hospital</button>
+                    </div>
+                    <br />
+                    @Html.AjaxGrid(Url.Action("HospitalesGrid", "Hospitales",
+                    new
+                         {
+                            _usuario = User.Identity.Name,
+
+                    }), new { id = "gridHospitales", name = "gridHospitales" })
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="areas" role="tabpanel" aria-labelledby="area-tab">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <section class="content-header">
+                    <div class="row bottom30">
+                        <br />
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 style="margin-top: 10px; text-align:center;">Areas</h3>
+                        </div>
+                    </div>
+                </section>
+                <section class="content">
+                    <br />
+                    <div>
+                        <button class="btn btn-primary" onclick="AbrirModalArea(0)">Registrar Area</button>
+                    </div>
+                    <br />
+                    @Html.AjaxGrid(Url.Action("AreasGrid", "Hospitales",
+                    new
+                         {
+                            _usuario = User.Identity.Name,
+
+                    }), new { id = "gridAreas", name = "gridAreas" })
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+    </div>
+</div>
+
+<!--Modal para Editar/Crear Hospitales-->
+<div id="mdl_Hopsitales" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hospital</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <br />
+            <div class="modal-body">
+
+                <!-- PartialView _ModalHospital.cshtml -->
+
+            </div>
+            <!-- Modal footer -->
+            <div class=" modal-footer">
+                <button type="button" class="btn btn-success" onclick="RegistrarEditarHospital()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal para Editar/Crear Areas-->
+<div id="mdl_Areas" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Area</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <br />
+            <div class="modal-body">
+
+                <!-- PartialView _ModalArea.cshtml -->
+
+            </div>
+            <!-- Modal footer -->
+            <div class=" modal-footer">
+                <button type="button" class="btn btn-success" onclick="RegistrarEditarArea()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+<script type="text/javascript">
+
+    window.onload = (event) => {
+
+        [].forEach.call(document.getElementsByClassName('mvc-grid'), function (element) {
+            new MvcGrid(element);
+        });
+
+        var direccion_ip = $("#Direccion_ip").val();
+       console.log("Bienvenido " + direccion_ip);
+    }
+
+    function AbrirModalHospital(id_hospital) {
+        $.ajax({
+            type: "POST",
+            url: '@Href("~/Hospitales/AbrirModalHospital")',
+            data: JSON.stringify({ _id_hospital: id_hospital }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+
+                $("#mdl_Hopsitales").find(".modal-body").html(response);
+                $("#mdl_Hopsitales").modal('show');
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+    function AbrirModalArea(id_area) {
+        $.ajax({
+            type: "POST",
+            url: '@Href("~/Hospitales/AbrirModalArea")',
+            data: JSON.stringify({ _id_area: id_area }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+
+                $("#mdl_Areas").find(".modal-body").html(response);
+                $("#mdl_Areas").modal('show');
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+    function RegistrarEditarHospital() {
+
+        var formData = new FormData();
+        formData.append("Id", $("#Id").val());
+        formData.append("Nombre", $("#Nombre").val());
+        formData.append("Director", $("#Director").val());
+        formData.append("Direccion", $("#Direccion").val());
+        formData.append("Municipio", $("#Municipio").val());
+        formData.append("Estado", $("#Estado").val());
+
+         $.ajax({
+            type: "POST",
+            url: '@Href("~/Hospitales/RegistrarEditarHospital")',
+            data: formData,
+            contentType: false,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            success: function (response) {
+
+                if (response == 1) {
+                    $("#mdl_Hopsitales").modal('hide');
+                    var grid = new MvcGrid(document.querySelector(".mvc-grid"))
+                    grid.reload();
+                }
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+    function RegistrarEditarArea() {
+        var formData = new FormData();
+        formData.append("Id", $("#Id").val());
+        formData.append("Nombre_area", $("#Nombre_area").val());
+        formData.append("Id_hospital", $("#Hospital").val());
+
+         $.ajax({
+            type: "POST",
+            url: '@Href("~/Hospitales/RegistrarEditarArea")',
+            data: formData,
+            contentType: false,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            success: function (response) {
+
+                if (response == 1) {
+                    $("#mdl_Areas").modal('hide');
+
+                    var grid = new MvcGrid(document.querySelector("#gridAreas"))
+                    grid.reload();
+                    var grid2 = new MvcGrid(document.querySelector("#gridHospitales"))
+                    grid2.reload();
+                }
+
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+        });
+    }
+
+</script>

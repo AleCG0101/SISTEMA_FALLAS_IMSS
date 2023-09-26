@@ -1,0 +1,21 @@
+﻿@model Sistema_Fallas_IMSS.ViewModels.VM_Areas
+@{
+    Layout = null;
+}
+@Html.HiddenFor(model => model.Id)
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label>Nombre:</label>
+            @Html.TextBoxFor(model => model.Nombre_area, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label>Hospital:</label>
+            @Html.DropDownListFor(model => model.Hospital, Model.Hospitales, "Seleccione Hospital" ,new {@class = "form-control"})
+        </div>
+    </div>      
+</div>
+

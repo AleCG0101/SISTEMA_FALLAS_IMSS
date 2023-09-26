@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a8a9e7ec3e89408aba39c27194eb9ed9" Name="Diagram1">
+        <EntityTypeShape EntityType="IMSSModel.areas_imss" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.asignaciones" Width="1.5" PointX="10.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.existencias" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.fallas" Width="1.5" PointX="13.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.hospitales_imss" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.material_estados" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.material_seriales" Width="1.5" PointX="7.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.materiales" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.operacion" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.reporte" Width="1.5" PointX="13.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.reporte_fallas" Width="1.5" PointX="15.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.rol_operacion" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.roles" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.tipo_hardware" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.tipos_falla" Width="1.5" PointX="11.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSSModel.usuarios" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="IMSSModel.FK__areas_ims__id_ho__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__existenci__id_ar__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__usuarios__id_are__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__asignacio__id_ex__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__asignacio__id_us__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__existenci__id_ma__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__material___id_ex__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__reporte__id_exis__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__fallas__Id_tipo___71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__reporte_f__id_fa__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__materiale__id_es__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__materiale__id_ti__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__rol_opera__id_op__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__reporte__id_usua__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__reporte_f__id_re__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__rol_opera__Id_ro__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSSModel.FK__usuarios__id_rol__68487DD7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

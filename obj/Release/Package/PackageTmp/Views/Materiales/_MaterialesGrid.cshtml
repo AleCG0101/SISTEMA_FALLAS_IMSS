@@ -1,0 +1,24 @@
+﻿@using NonFactors.Mvc.Grid
+@model List<Sistema_Fallas_IMSS.ViewModels.VM_MaterialesCatalogo>
+@(Html.Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id_material).Hidden();
+        columns.Add(model => model.Nombre).Titled("Nombre");
+        columns.Add(model => model.Marca).Titled("Marca");
+        columns.Add(model => model.Modelo).Titled("Modelo");
+        columns.Add(model => model.Tipo_hardware).Titled("Tipo de Hardware");
+        columns.Add(model => model.Centro_costos).Titled("Centro de costos");
+        columns.Add(model => model.Proyecto).Titled("Proyecto");
+        columns.Add(model => model.Estado).Titled("Estado");
+        columns.Add(model => model.Comentarios).Titled("Comentarios");
+        columns.Add(model => model.Id_material).Titled("Editar").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick='AbrirModalMaterial({model.Id_material})' data-placement='left'><span style='text-align:center'><i class='fa-solid fa-pen-to-square btn btn-info'></i></span></a>");
+    })
+.Empty("Sin registros encontrados")
+.Named("gridMateriales")
+.Id("gridMateriales")
+.Pageable(pager =>
+{
+    pager.RowsPerPage = 10;
+})
+)

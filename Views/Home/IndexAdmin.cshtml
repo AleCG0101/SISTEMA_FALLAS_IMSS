@@ -1,0 +1,48 @@
+﻿@using NonFactors.Mvc.Grid
+@model Sistema_Fallas_IMSS.ViewModels.VM_Index
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <section class="content-header">
+            <div class="row bottom30">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3 style="margin-top: 10px;">Reportes</h3>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <br />
+            <div>
+                <button class="btn btn-primary">
+                    Registrar Reporte
+                </button>
+            </div>
+            <br />
+            <form id="FormFilter" method="get" action="">
+            </form>
+            @Html.AjaxGrid(Url.Action("IndexGrid", "Home",
+            new
+                 {
+                    _usuario = User.Identity.Name,
+                    
+            }), new { id = "gridReportes", name = "gridReportes" })
+        </section>
+    </div>
+</div>
+
+<script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+<script type="text/javascript">
+
+    window.onload = (event) => {
+
+        [].forEach.call(document.getElementsByClassName('mvc-grid'), function (element) {
+            new MvcGrid(element);
+        });
+    }
+
+</script>
+
