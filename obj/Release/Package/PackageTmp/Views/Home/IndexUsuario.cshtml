@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.HiddenFor(model => model.Direccion_ip)
+@Html.HiddenFor(model => model.Usuario)
 <br />
 <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -79,7 +80,7 @@
             console.log("cambiado", ddl_tipo);
 
             $("#div_otra_falla").show();
-
+            $('#ddl_fallas').html('');
         } else {
             $("#div_otra_falla").hide();
             $.ajax({
@@ -135,7 +136,9 @@
             success: function (response) {
 
                 if (response == 1) {
-                    url = '@Href("~Home/Index")';
+                    var usuario = $("#Usuario").val();
+                    url = '/Home/Index?usuario=' + usuario;
+                    window.location = url;
                 }
 
             },
