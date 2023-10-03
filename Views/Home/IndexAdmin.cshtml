@@ -4,6 +4,15 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    table {
+        font-size: 14px; /* Tamaño de fuente más pequeño */
+    }
+
+    th {
+        font-size: 14px; /* Tamaño de fuente más pequeño para los encabezados de columna */
+    }
+</style>
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -17,7 +26,7 @@
         <section class="content">
             <br />
             <div>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" onclick="AbrirModalReporte()">
                     Registrar Reporte
                 </button>
             </div>
@@ -28,9 +37,30 @@
             new
                  {
                     _usuario = User.Identity.Name,
-                    
+
             }), new { id = "gridReportes", name = "gridReportes" })
         </section>
+    </div>
+</div>
+<!--Modal para Crear Reportes-->
+<div id="mdl_Reporte" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear Reporte</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <br />
+            <div class="modal-body">
+
+                <!-- PartialView _ModalReporte.cshtml -->
+
+            </div>
+            <!-- Modal footer -->
+            <div class=" modal-footer">
+                <button type="button" class="btn btn-success" onclick="RegistrarReporte()">Guardar</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -41,6 +71,66 @@
 
         [].forEach.call(document.getElementsByClassName('mvc-grid'), function (element) {
             new MvcGrid(element);
+        });
+    }
+
+    function DdlTipoChange() {
+        var ddl_tipo = $("#ddl_tipo").val();
+
+        if (ddl_tipo == "0") {
+            console.log("cambiado", ddl_tipo);
+
+            $("#div_otra_falla").show();
+            $('#ddl_fallas').html('');
+        } else {
+            $("#div_otra_falla").hide();
+            $.ajax({
+                type: "GET",
+                url: '@Href("~/Home/ObtenerFallas")',
+                data: { _id_tipo: ddl_tipo },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response.length > 0) {
+                        $('#ddl_fallas').html('');
+                        for (var i = 0; i < response.length; i++) {
+                            $('#ddl_fallas').append('<option value="' + response[i].Value + '">' + response[i].Text + '</option>');
+                        }
+                        $('#ddl_fallas').append('<option value="' + "0" + '">' + "Otra falla" + '</option>');
+                    }
+                    else {
+                        $('#ddl_fallas').html('');
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+    }
+
+    function DdlFallasChange() {
+        var ddl_falla = $("#ddl_fallas").val();
+        if (ddl_falla == "0") {
+            $("#div_otra_falla").show();
+        } else {
+            $("#div_otra_falla").hide();
+        }
+    }
+
+    function AbrirModalReporte() {
+        $.ajax({
+            type: "POST",
+            url: '@Href("~/Home/ModalReporte")',
+            data: null,
+            dataType: "html",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+
+                $("#mdl_Reporte").find(".modal-body").html(response);
+                $("#mdl_Reporte").modal('show');
+            },
+            error: function () {
+            }
         });
     }
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.IO;
 using System.Web.Mvc;
 
 namespace Sistema_Fallas_IMSS.Controllers
@@ -20,6 +21,8 @@ namespace Sistema_Fallas_IMSS.Controllers
                 {
                     return Redirect("~/Account/Login");
                 }
+                //var contexto = System.Web.HttpContext.Current;
+                //string localIP = contexto.Request.UserHostAddress;
                 string localIP = "";
                 IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip
                 foreach (IPAddress ip in host.AddressList)
@@ -29,6 +32,7 @@ namespace Sistema_Fallas_IMSS.Controllers
                         localIP = ip.ToString().Trim();// esta es nuestra ip
                     }
                 }
+
                 var persona = context.existencias.Where(model => model.direccion_ip == localIP).Select(model => model.nombre_persona).FirstOrDefault();
                 VM_Index data = new VM_Index
                 {
@@ -45,6 +49,15 @@ namespace Sistema_Fallas_IMSS.Controllers
                     return View("IndexAdmin", data);
             }
             
+        }
+        public static int ObtenerRol(string _usuario)
+        {
+            using (var context = new IMSSEntities())
+            {
+                var usuario = context.usuarios.Where(us => us.cuenta == _usuario).FirstOrDefault();
+
+                return (int)usuario.id_rol;
+            }
         }
 
         public VM_Reportes ObtnerDatos()
@@ -67,17 +80,14 @@ namespace Sistema_Fallas_IMSS.Controllers
                 return reportes;
             }
         }
-
-
-        public static int ObtenerRol(string _usuario)
+        [HttpPost]
+        public ActionResult ModalReporte()
         {
-            using (var context = new IMSSEntities())
-            {
-                var usuario = context.usuarios.Where(us => us.cuenta == _usuario).FirstOrDefault();
+            VM_Reportes data = ObtnerDatos();
 
-                return (int)usuario.id_rol;
-            }
+            return PartialView("_ModalReporte",data);
         }
+     
         [HttpGet]
         public JsonResult ObtenerFallas(int _id_tipo)
         {
@@ -170,7 +180,7 @@ namespace Sistema_Fallas_IMSS.Controllers
                                     UNION
                                     SELECT DISTINCT
                                         reporte.Id_reporte,
-                                        existencias.nombre_persona usuario,
+                                        COALESCE(existencias.nombre_persona, 'Sin registrar') AS usuario,
                                         reporte.descripcion,
                                         reporte.estatus,
                                         reporte.fecha_registro,
@@ -178,11 +188,11 @@ namespace Sistema_Fallas_IMSS.Controllers
                                         reporte.contacto,
                                         COALESCE(fallas.descripcion, rfallas.falla) AS falla,
 										COALESCE(tipo.descripcion, 'Otro') AS tipo,
-                                        area.nombre_area
+                                        COALESCE(area.nombre_area, 'Sin registrar') AS usuario
                                     FROM
                                         reporte
-                                    INNER JOIN existencias ON reporte.ip_usuario = existencias.direccion_ip
-									INNER JOIN areas_imss area ON existencias.id_area = area.Id_area
+                                    LEFT JOIN existencias ON reporte.ip_usuario = existencias.direccion_ip
+									LEFT JOIN areas_imss area ON existencias.id_area = area.Id_area
 									LEFT JOIN reporte_fallas rfallas ON reporte.Id_reporte = rfallas.id_reporte
 									LEFT JOIN fallas ON rfallas.id_falla = fallas.Id_falla
 									LEFT JOIN tipos_falla tipo ON fallas.Id_tipo_falla = tipo.Id_tipo_falla

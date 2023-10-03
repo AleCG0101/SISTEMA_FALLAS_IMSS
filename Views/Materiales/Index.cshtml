@@ -213,7 +213,7 @@
          $.ajax({
             type: "POST",
             url: '@Href("~/Materiales/AbrirModalTipo")',
-             data: JSON.stringify({ _id_tipo: id_tipo }),
+            data: JSON.stringify({ _id_tipo: id_tipo }),
             contentType: "application/json; charset=utf-8",
             dataType: "html",
             success: function (response) {

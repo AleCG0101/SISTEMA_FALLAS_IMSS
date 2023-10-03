@@ -355,3 +355,7 @@ C:\Users\aleca\OneDrive\Escritorio\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\obj\D
 C:\Users\aleca\OneDrive\Escritorio\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\obj\Debug\Sistema_Fallas_IMSS.csproj.CopyComplete
 C:\Users\aleca\OneDrive\Escritorio\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\obj\Debug\Sistema_Fallas_IMSS.dll
 C:\Users\aleca\OneDrive\Escritorio\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\obj\Debug\Sistema_Fallas_IMSS.pdb
+C:\Users\aleca\OneDrive\Documentos\Residencia\Sistema IMSS\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\bin\Rotativa.dll
+C:\Users\aleca\OneDrive\Documentos\Residencia\Sistema IMSS\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\aleca\OneDrive\Documentos\Residencia\Sistema IMSS\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\bin\System.Reflection.TypeExtensions.dll
+C:\Users\aleca\OneDrive\Documentos\Residencia\Sistema IMSS\Sistema_Fallas_IMSS\Sistema_Fallas_IMSS\bin\System.Diagnostics.DiagnosticSource.xml

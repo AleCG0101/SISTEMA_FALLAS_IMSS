@@ -1,0 +1,40 @@
+﻿@model Sistema_Fallas_IMSS.ViewModels.VM_Reportes
+@{
+    ViewBag.Title = "_ModalReporte";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label class="form-label">Tipo de falla</label>
+            @Html.DropDownListFor(model => model.Tipo, Model.Tipos, "Seleccione un Tipo de falla", new { @id = "ddl_tipo", @onchange = "DdlTipoChange()", @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label class="form-label">Falla:</label>
+            @Html.DropDownListFor(model => model.Falla, Model.Fallas, "Seleccione una Falla", new { @id = "ddl_fallas", @onchange = "DdlFallasChange()", @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div id="div_otra_falla" class="row" style="display:none;">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="form-label">Tipo de falla:</label>
+            @Html.TextBoxFor(model => model.Otra_falla, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="form-label">Descripcion detallada:</label>
+            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", @rows = 5 })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="form-label">Contacto:</label>
+            @Html.TextBoxFor(model => model.Contacto, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+</div>
