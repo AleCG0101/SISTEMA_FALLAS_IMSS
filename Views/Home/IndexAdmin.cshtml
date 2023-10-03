@@ -13,7 +13,7 @@
         font-size: 14px; /* Tamaño de fuente más pequeño para los encabezados de columna */
     }
 </style>
-
+@Html.HiddenFor(model => model.Direccion_ip)
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <section class="content-header">
@@ -131,6 +131,47 @@
             },
             error: function () {
             }
+        });
+    }
+
+    function RegistrarReporte() {
+
+        var formData = new FormData();
+        formData.append("Usuario", $("#Direccion_ip").val());
+        formData.append("Descripcion", $("#Descripcion").val());
+        formData.append("Contacto", $("#Contacto").val());
+        formData.append("Falla", $("#ddl_fallas").val());
+        formData.append("Otra_falla", $("#Otra_falla").val());
+        formData.append("Tipo", $("#ddl_tipo").val());
+
+        $.ajax({
+            type: "POST",
+            url: '@Href("~/Home/GenerarReporte")',
+            data: formData,
+            contentType: false,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            success: function (response) {
+
+                if (response == 1) {
+                    Swal.fire(
+                        'Creado!',
+                        'El reporte se ha creado!',
+                        'success'
+                    )
+                    $("#mdl_Reporte").modal('hide');
+                    var grid = new MvcGrid(document.querySelector(".mvc-grid"))
+                    grid.reload();
+
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
         });
     }
 

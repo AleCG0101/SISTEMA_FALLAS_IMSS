@@ -127,7 +127,7 @@ namespace Sistema_Fallas_IMSS.Controllers
                         {
                             id_reporte = reporte.Id_reporte,
                             falla = _reporte.Otra_falla,
-                            id_falla = _reporte.Falla != null ? Convert.ToInt32(_reporte.Falla) : 0,
+                            id_falla = _reporte.Falla != "null" ? Convert.ToInt32(_reporte.Falla) : 0,
                         };
                         context.reporte_fallas.Add(fallas);
                         context.SaveChanges();
@@ -180,7 +180,7 @@ namespace Sistema_Fallas_IMSS.Controllers
                                     UNION
                                     SELECT DISTINCT
                                         reporte.Id_reporte,
-                                        COALESCE(existencias.nombre_persona, 'Sin registrar') AS usuario,
+                                        COALESCE(existencias.nombre_persona, reporte.ip_usuario) AS usuario,
                                         reporte.descripcion,
                                         reporte.estatus,
                                         reporte.fecha_registro,

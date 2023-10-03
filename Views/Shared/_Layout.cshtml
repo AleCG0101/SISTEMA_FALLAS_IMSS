@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/Content/CSS/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" href="~/Content/CSS/font-awesome/css/brands.css">
     <link rel="stylesheet" href="~/Content/CSS/font-awesome/css/solid.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css">
 
     <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
 
@@ -33,7 +34,7 @@
                     }
                 </ul>
                 <div class="nav-item ml-auto">@Html.ActionLink("Salir", "Logout", "Account", new { usuario = User.Identity.Name }, new { @class = "btn btn-danger" })</div>
-                
+
             </div>
         </div>
     </nav>
@@ -46,5 +47,6 @@
     </div>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.all.min.js"></script>
 </body>
 </html>

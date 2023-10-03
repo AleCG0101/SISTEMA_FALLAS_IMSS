@@ -136,9 +136,25 @@
             success: function (response) {
 
                 if (response == 1) {
-                    var usuario = $("#Usuario").val();
-                    url = '/Home/Index?usuario=' + usuario;
-                    window.location = url;
+                    Swal.fire({
+                        title: 'Reporte creado con exito!!',
+                        text: "Quieres crear otro reporte?",
+                        icon: "success",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Sí',
+                        denyButtonText: 'No, Salir',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var usuario = $("#Usuario").val();
+                            url = '/Home/Index?usuario=' + usuario;
+                            window.location = url;
+                        } else if (result.isDenied) {
+                            window.location = "/Account/Logout"
+                        }
+                    })
+                    
                 }
 
             },
