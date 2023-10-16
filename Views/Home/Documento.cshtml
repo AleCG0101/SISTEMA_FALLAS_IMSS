@@ -1,0 +1,70 @@
+﻿@model Sistema_Fallas_IMSS.ViewModels.VM_Reportes
+@{
+    Layout = null;
+}
+<style>
+    .pageitem {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        margin-bottom: 15px;
+        padding-top: 15px;
+        text-align: justify;
+    }
+        .pageitem .col {
+            padding: 0 2% 0 1%;
+        }
+
+    .col {
+        display: table-cell;
+    }
+    .contenedor {
+        border-radius: 5px;
+        border: 0.5px solid #000;
+        background: #F7F7F7;
+        height: 1000px;
+    }
+</style>
+<div>
+    <img src="~/Content/Imagenes/encabezado.png" style="width:100%;" />
+</div>
+<br />
+<div class="row" style="text-align:center;">
+        <h1>REPORTE DE FALLA</h1>
+</div>
+<br />
+<div class="contenedor">
+    <div style="padding:15px;">
+        <div style="text-align:end;">
+            <h2>FECHA: @Model.Fecha</h2>
+        </div>
+        <br />
+        <div class="col-sm-12">
+            <h2>USUARIO: @Model.Usuario</h2>
+        </div>
+        <div class="col-sm-12">
+            <h2>AREA: @Model.Nombre_area</h2>
+        </div>
+        <br />
+        <div class="pageitem">
+            <div class="col">
+                <h2>TIPO DE FALLA: @Model.Tipo</h2>
+            </div>
+            <div class="col">
+                <h2>FALLA: @Model.Falla</h2>
+            </div>
+        </div>
+        <br />
+        <div style="text-align:center;">
+            <h2>DESCRIPCION DEL REPORTE:</h2>
+        </div>
+        <br />
+        <div>
+            <h2>@Model.Descripcion</h2>
+        </div>
+        <br />
+        <h2>CONTACTO: @Model.Contacto</h2>
+    </div>
+</div>
+
+

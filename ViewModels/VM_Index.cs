@@ -25,6 +25,7 @@ namespace Sistema_Fallas_IMSS.ViewModels
         public string Descripcion { get; set; }
         public int Estatus { get; set; }
         public DateTime Fecha_registro { get; set; }
+        public string Fecha { get; set; }
         public DateTime? Fecha_concluido { get; set; }
         public string Contacto { get; set; }
         public List<SelectListItem> Tipos { get; set; } = new List<SelectListItem>();

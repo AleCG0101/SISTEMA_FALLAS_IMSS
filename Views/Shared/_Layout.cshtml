@@ -31,6 +31,7 @@
                         <li>@Html.ActionLink("Hospitales", "Index", "Hospitales", new { usuario = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Materiales", "Index", "Materiales", new { usuario = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Usuarios", "Index", "Usuarios", new { usuario = User.Identity.Name }, new { @class = "nav-link" })</li>
+
                     }
                 </ul>
                 <div class="nav-item ml-auto">@Html.ActionLink("Salir", "Logout", "Account", new { usuario = User.Identity.Name }, new { @class = "btn btn-danger" })</div>

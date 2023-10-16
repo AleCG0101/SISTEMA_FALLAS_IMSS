@@ -13,7 +13,7 @@
         columns.Add(model => model.Fecha_concluido).Titled("Fecha Concluido").Formatted("{0:d}");
         columns.Add(model => model.Id_reporte).Titled("Finalizar").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick=''><span style='text-align:center'><i class='fa-regular fa-circle-check btn btn-success'></i></span></a>");
         columns.Add(model => model.Id_reporte).Titled("Cancelar").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick=''><span style='text-align:center'><i class='fa-solid fa-circle-xmark btn btn-danger'></i></span></a>");
-        columns.Add(model => model.Id_reporte).Titled("Imprimir").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='#' onclick=''><span style='text-align:center'><i class='fa-regular fa-download btn btn-info'></i></span></a>");
+        columns.Add(model => model.Id_reporte).Titled("Imprimir").Encoded(false).Css("text-center").RenderedAs(model => $"<a href='{Href($"~/Home/Imprimir?_id_reporte={model.Id_reporte}")}' target='_blank' onclick=''><span style='text-align:center'><i class='fa-regular fa-download btn btn-info'></i></span></a>");
     })
 .Empty("Sin registros encontrados")
 .Named("gridReportes")

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.IO;
 using System.Web.Mvc;
+using Rotativa;
 
 namespace Sistema_Fallas_IMSS.Controllers
 {
@@ -140,6 +141,67 @@ namespace Sistema_Fallas_IMSS.Controllers
                         return 0;
                     }
                 }
+            }
+        }
+        public ActionResult Reporte(int id_reporte)
+        {
+            VM_Reportes reporte = ObtenerReporte(id_reporte);
+            reporte.Fecha = reporte.Fecha_registro.ToLongDateString();
+            reporte.Contacto = String.IsNullOrEmpty(reporte.Contacto) ? "Sin contacto" : reporte.Contacto;
+            return View("Documento",reporte);
+        }
+
+        public ActionResult Imprimir(int _id_reporte)
+        {           
+            return new ActionAsPdf("Reporte", new { id_reporte = _id_reporte });
+        }
+        private VM_Reportes ObtenerReporte(int _id_reporte)
+        {
+            using (var context = new IMSSEntities())
+            {
+
+                var sqlString = $@"SELECT * FROM (
+                                    SELECT
+                                        reporte.Id_reporte,
+                                        existencias.nombre_persona usuario,
+                                        reporte.descripcion,
+                                        reporte.estatus,
+                                        reporte.fecha_registro,
+                                        reporte.fecha_concluido,
+                                        reporte.contacto,
+                                        fallas.descripcion falla,
+                                        tipo.descripcion tipo,
+                                        area.nombre_area
+                                    FROM
+                                        reporte
+                                    INNER JOIN existencias ON reporte.ip_usuario = existencias.direccion_ip
+                                    INNER JOIN areas_imss area ON existencias.id_area = area.Id_area
+                                    LEFT JOIN reporte_fallas rfallas ON reporte.Id_reporte = rfallas.id_reporte
+                                    INNER JOIN fallas ON rfallas.id_falla = fallas.Id_falla
+                                    INNER JOIN tipos_falla tipo ON fallas.Id_tipo_falla = tipo.Id_tipo_falla
+                                    UNION
+                                    SELECT DISTINCT
+                                        reporte.Id_reporte,
+                                        COALESCE(existencias.nombre_persona, reporte.ip_usuario) AS usuario,
+                                        reporte.descripcion,
+                                        reporte.estatus,
+                                        reporte.fecha_registro,
+                                        reporte.fecha_concluido,
+                                        reporte.contacto,
+                                        COALESCE(fallas.descripcion, rfallas.falla) AS falla,
+										COALESCE(tipo.descripcion, 'Otro') AS tipo,
+                                        COALESCE(area.nombre_area, 'Sin registrar') AS usuario
+                                    FROM
+                                        reporte
+                                    LEFT JOIN existencias ON reporte.ip_usuario = existencias.direccion_ip
+									LEFT JOIN areas_imss area ON existencias.id_area = area.Id_area
+									LEFT JOIN reporte_fallas rfallas ON reporte.Id_reporte = rfallas.id_reporte
+									LEFT JOIN fallas ON rfallas.id_falla = fallas.Id_falla
+									LEFT JOIN tipos_falla tipo ON fallas.Id_tipo_falla = tipo.Id_tipo_falla
+                                  ) AS consulta
+                                    WHERE consulta.Id_reporte = {_id_reporte};";
+
+                return context.Database.SqlQuery<VM_Reportes>(sqlString).FirstOrDefault();
             }
         }
 

@@ -1,0 +1,32 @@
+﻿@model Sistema_Fallas_IMSS.ViewModels.VM_ListUsuarios
+@{
+    ViewBag.Title = "_ModalUsuario";
+    Layout = null;
+}
+
+@Html.HiddenFor(model => model.Id, new {@id = "mdlUsuario_hdf_id"})
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label>Nombre:</label>
+            @Html.TextBoxFor(model => model.Nombre, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Cuenta:</label>
+            @Html.TextBoxFor(model => model.Cuenta, "", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Contraseña:</label>
+            @Html.TextBox("Pass", "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Rol:</label>
+            @Html.DropDownListFor(model => model.Rol, Model.Roles, "Seleccione un rol", new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+</div>
